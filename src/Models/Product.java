@@ -2,10 +2,14 @@ package Models;
 
 import Enums.Categories;
 
+import java.util.List;
+
 public abstract class Product {
     private String name;
     private double price;
     private int quantity;
+    private List<Review> reviews;
+
 
     private Categories category;
 
@@ -41,5 +45,26 @@ public abstract class Product {
     }
     public void setCategory(Categories category) {
         this.category = category;
+    }
+    public List<Review> getReviews() {
+        return reviews;
+    }
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+    public void addReview(Review review) {
+        this.reviews.add(review);
+    }
+    public double getAverageRating() {
+        double sum = 0;
+        for (Review review : reviews) {
+            sum += review.getRating();
+        }
+        return sum / reviews.size();
+    }
+    public void displayReviews() {
+        for (Review review : reviews) {
+            System.out.println(review.getUser().getUserName() + " " + review.getRating() + " " + review.getComment());
+        }
     }
 }
