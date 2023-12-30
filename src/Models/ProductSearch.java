@@ -1,67 +1,72 @@
 package Models;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.HashMap;
 
 public class ProductSearch extends Product {
-    private List<Product> products;
+    private HashMap<String,Product> products;
 
-    public List<Product> searchByName(String keyword) {
-        List<Product> matchingProducts = new ArrayList<>();
+    public ProductSearch() {
+        products = new HashMap<>();
 
-        for (Product product : products) {
+    }
+
+    public HashMap<String,Product> searchByName(String keyword) {
+        HashMap<String,Product> matchingProducts = new HashMap<>();
+
+        for (Product product : products.values()) {
             if (product.getName().toLowerCase().contains(keyword.toLowerCase())) {
                 // Match found, add product to the result list
-                matchingProducts.add(product);
+                matchingProducts.put(product.getName(), product);
             }
         }
         return matchingProducts;
     }
 
-    public List<Product> filterByPriceRange(double minPrice, double maxPrice) {
-        List<Product> matchingProducts = new ArrayList<>();
+    public HashMap<String,Product> filterByPriceRange(double minPrice, double maxPrice) {
+        HashMap<String,Product> matchingProducts = new HashMap<>();
 
-        for (Product product : products) {
+        for (Product product : products.values()) {
             if (product.getPrice() >= minPrice && product.getPrice() <= maxPrice) {
                 // Match found, add product to the result list
-                matchingProducts.add(product);
+                matchingProducts.put(product.getName(), product);
             }
         }
         return matchingProducts;
     }
 
-    public List<Product> filterByCategory(String category) {
-        List<Product> matchingProducts = new ArrayList<>();
+    public HashMap<String,Product> filterByCategory(String category) {
+        HashMap<String,Product> matchingProducts = new HashMap<>();
 
-        for (Product product : products) {
+        for (Product product : products.values()) {
             if (product.getCategory().equals(category)) {
                 // Match found, add product to the result list
-                matchingProducts.add(product);
+                matchingProducts.put(product.getName(), product);
             }
         }
         return matchingProducts;
     }
 
-    public List<Product> filterByAvailability() {
-        List<Product> matchingProducts = new ArrayList<>();
+    public HashMap<String,Product> filterByAvailability() {
+        HashMap<String,Product> matchingProducts = new HashMap<>();
 
-        for (Product product : products) {
+        for (Product product : products.values()) {
             if (product.getQuantity() > 0) {
                 // Match found, add product to the result list
-                matchingProducts.add(product);
+                matchingProducts.put(product.getName(), product);
             }
         }
         return matchingProducts;
     }
 
-    public List<Product> searchAndFilter(String keyword, double minPrice, double maxPrice, String category) {
-        List<Product> matchingProducts = new ArrayList<>();
+    public HashMap<String,Product> searchAndFilter(String keyword, double minPrice, double maxPrice, String category) {
+        HashMap<String,Product> matchingProducts = new HashMap<>();
 
-        for (Product product : products) {
+        for (Product product : products.values()) {
             if (product.getName().toLowerCase().contains(keyword.toLowerCase()) &&
                     product.getPrice() >= minPrice && product.getPrice() <= maxPrice &&
                     product.getCategory().equals(category)) {
-                matchingProducts.add(product);
+                matchingProducts.put(product.getName(), product);
             }
             return matchingProducts;
         }

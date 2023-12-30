@@ -20,31 +20,15 @@ public class AppInterface {
 
             switch (choice) {
                 case 1:
-                    // Implement methods for User login and register
                     login.login();
                     break;
-                case 2:
-                    // Implement methods for Product Management
-
-                    break;
-                case 3:
-                    // Implement methods for Shopping Cart
-
-                    break;
-                case 4:
-                    // Implement methods for Order Processing
-                    break;
-                case 5:
-                    //Implement logout
-
-                    break;
-                case 6 :
+                case 2 :
                     System.out.println("Thank you for using the E-Commerce App. Goodbye!");
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
             }
-        } while (choice !=7);
+        } while (choice !=2);
 
         scanner.close();
     }
@@ -52,11 +36,8 @@ public class AppInterface {
     private static void displayMenu() {
         System.out.println("\n=== E-Commerce Console App Menu ===");
         System.out.println("1. User Authentication");
-        System.out.println("2. Product Management");
-        System.out.println("3. Shopping Cart");
-        System.out.println("4. Order Processing");
-        System.out.println("5. Logout");
-        System.out.println("6. Exit");
+        System.out.println("2. Logout");
+        System.out.println("3. Exit");
     }
 }
 

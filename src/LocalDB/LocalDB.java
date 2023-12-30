@@ -44,6 +44,8 @@ public final class LocalDB {
     public void showProducts() {
         for (var product : products.values()) {
             System.out.println(product.getName() + " " + product.getPrice() + " " + product.getQuantity());
+            System.out.println(product.getAverageRating());
+            product.displayReviews();
         }
     }
     public Product getProduct(String productName) {
@@ -65,5 +67,13 @@ public final class LocalDB {
             return;
         }
         product.setQuantity(product.getQuantity() - productQuantity);
+    }
+
+    public boolean isOutOfStock(Product product) {
+        var productInDB = products.get(product.getName());
+        if (productInDB == null) {
+            return true;
+        }
+        return productInDB.getQuantity() == 0;
     }
 }
