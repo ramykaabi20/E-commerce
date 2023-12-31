@@ -7,7 +7,6 @@ public class AppInterface {
         Scanner scanner = new Scanner(System.in);
         boolean isLoggedIn = false;
         int choice;
-        System.out.println("Welcome to the Online Store!");
         System.out.println("Please login or register to continue.");
 
 
@@ -33,11 +32,10 @@ public class AppInterface {
         scanner.close();
     }
 
-    private static void displayMenu() {
+    static void displayMenu() {
         System.out.println("\n=== E-Commerce Console App Menu ===");
         System.out.println("1. User Authentication");
         System.out.println("2. Logout");
-        System.out.println("3. Exit");
     }
 }
 

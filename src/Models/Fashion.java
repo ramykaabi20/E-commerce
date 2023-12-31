@@ -1,10 +1,10 @@
 package Models;
 
+import Enums.Categories;
+
 public class Fashion extends Product{
 
-    public Fashion(String name, double price, int quantity) {
-        this.setName(name);
-        this.setPrice(price);
-        this.setQuantity(quantity);
+    public Fashion(int ID,String name, double price, int quantity) {
+        super(ID,name, price, quantity, Categories.valueOf("FASHION"));
     }
 }

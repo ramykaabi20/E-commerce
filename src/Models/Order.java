@@ -97,8 +97,12 @@ public class Order {
     public void addProduct(Product product) {
         this.Product = product;
     }
-    public void removeProduct(Product product) {
-        this.Product = null;
+    public void removeProduct(int ProducId) {
+        for(int i = 0; i < Product.getQuantity(); i++) {
+            if(Product.getProductId() == ProducId) {
+                Product.setQuantity(Product.getQuantity() - 1);
+            }
+        }
     }
     public void showOrder() {
         System.out.println("User: " + User.getUserName());

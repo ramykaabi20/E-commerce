@@ -1,14 +1,14 @@
 package Models;
 
 
+import LocalDB.LocalDB;
 import java.util.HashMap;
 
-public class ProductSearch extends Product {
+public class ProductSearch {
     private HashMap<String,Product> products;
 
     public ProductSearch() {
-        products = new HashMap<>();
-
+        products = LocalDB.getLocalDB().getProducts();
     }
 
     public HashMap<String,Product> searchByName(String keyword) {

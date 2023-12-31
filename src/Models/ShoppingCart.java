@@ -1,31 +1,52 @@
 package Models;
-
+import LocalDB.LocalDB;
 public class ShoppingCart {
-    private Product[] products;
-    private User user;
-    private int count;
+    private static Product[] products;
+    private static User user;
+    private static int count;
 
     public ShoppingCart() {
         this.products = new Product[10];
         this.count = 0;
     }
 
-    public void addProduct(Product product) {
-        if (this.count == this.products.length) {
-            Product[] newProducts = new Product[this.products.length * 2];
-            for (int i = 0; i < this.products.length; i++) {
-                newProducts[i] = this.products[i];
-            }
-            this.products = newProducts;
+    protected static void viewCart() {
+        System.out.println("Your cart contains:");
+        for (int i = 0; i < count; i++) {
+            System.out.println(products[i].getName() + " " + products[i].getPrice());
         }
-        this.products[this.count] = product;
-        this.count++;
     }
 
-    public void removeProduct(Product product) {
+    public static void addProduct(int ProductId, int quantity) {
+        Product product = LocalDB.getProduct(String.valueOf(ProductId));
+        if (product == null) {
+            throw new IllegalArgumentException("Product not found!");
+        }
+        if (product.getQuantity() < quantity) {
+            throw new IllegalArgumentException("Not enough quantity!");
+        }
+        product.setQuantity(product.getQuantity() - quantity);
+        for (int i = 0; i < count; i++) {
+            if (products[i].getProductId() == ProductId) {
+                products[i].setQuantity(products[i].getQuantity() + quantity);
+                return;
+            }
+        }
+        if (count == products.length) {
+            Product[] newProducts = new Product[products.length * 2];
+            for (int i = 0; i < count; i++) {
+                newProducts[i] = products[i];
+            }
+            products = newProducts;
+        }
+        products[count++] = product;
+
+    }
+
+    public static void removeProduct(int ProductId) {
         int index = -1;
-        for (int i = 0; i < this.count; i++) {
-            if (this.products[i].getName().equals(product.getName())) {
+        for (int i = 0; i < count; i++) {
+            if (products[i].getProductId() == ProductId) {
                 index = i;
                 break;
             }
@@ -33,23 +54,23 @@ public class ShoppingCart {
         if (index == -1) {
             throw new IllegalArgumentException("Product not found!");
         }
-        for (int i = index; i < this.count - 1; i++) {
-            this.products[i] = this.products[i + 1];
+        for (int i = index; i < count - 1; i++) {
+            products[i] = products[i + 1];
         }
-        this.count--;
+        count--;
     }
 
-    public double getTotalPrice() {
+    public static double getTotalPrice() {
         double totalPrice = 0;
-        for (int i = 0; i < this.count; i++) {
-            totalPrice += this.products[i].getPrice();
+        for (int i = 0; i < count; i++) {
+            totalPrice += products[i].getPrice();
         }
         return totalPrice;
     }
 
-    public Order checkout() {
-        this.products = new Product[10];
-        this.count = 0;
-        return new Order(user, null, 0, this.getTotalPrice(), null, null, null, null, null);
+    public static Order checkout() {
+        products = new Product[10];
+        count = 0;
+        return new Order(user, null, 0, getTotalPrice(), null, null, null, null, null);
     }
 }

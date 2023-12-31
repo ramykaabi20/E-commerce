@@ -48,7 +48,7 @@ public final class LocalDB {
             product.displayReviews();
         }
     }
-    public Product getProduct(String productName) {
+    public static Product getProduct(String productName) {
         var product = products.get(productName);
         if (product == null) {
             return null;
@@ -75,5 +75,9 @@ public final class LocalDB {
             return true;
         }
         return productInDB.getQuantity() == 0;
+    }
+
+    public HashMap<String, Product> getProducts() {
+        return products;
     }
 }

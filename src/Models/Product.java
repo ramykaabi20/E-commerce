@@ -5,6 +5,7 @@ import Enums.Categories;
 import java.util.List;
 
 public abstract class Product {
+    private int ProductId;
     private String name;
     private double price;
     private int quantity;
@@ -13,6 +14,13 @@ public abstract class Product {
 
     private Categories category;
 
+    public Product(int productId, String name, double price, int quantity, Categories category) {
+        ProductId = productId;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.category = category;
+    }
     public String getName() {
         return name;
     }
@@ -39,6 +47,9 @@ public abstract class Product {
             throw new IllegalArgumentException("Quantity must be a positive number!");
         }
         this.quantity = quantity;
+    }
+    public int getProductId() {
+        return ProductId;
     }
     public Categories getCategory() {
         return category;

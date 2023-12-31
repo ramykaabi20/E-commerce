@@ -1,10 +1,11 @@
 package Models;
 
+import Enums.Categories;
+
 public class Electronics extends Product{
 
-    public Electronics(String name, double price, int quantity) {
-        this.setName(name);
-        this.setPrice(price);
-        this.setQuantity(quantity);
+    public Electronics(int ID,String name, double price, int quantity){
+        super(ID,name, price, quantity, Categories.valueOf("ELECTRONICS"));
+
     }
 }
